@@ -53,9 +53,7 @@ export default function MainLayout() {
       {/* ── NAVBAR ──────────────────────────────────────────────── */}
       <nav
         className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
-          isScrolled
-            ? "py-3 glass-panel shadow-2xl"
-            : "py-6 bg-transparent"
+          isScrolled ? "py-3 glass-panel shadow-2xl" : "py-6 bg-transparent"
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
@@ -65,7 +63,7 @@ export default function MainLayout() {
               <Zap size={18} className="-rotate-45 text-white" />
             </div>
             <span className="logo-text text-xl font-black uppercase tracking-tighter">
-              Performance<span className="text-white">Hub</span>
+              Patrono<span className="text-white">MS</span>
             </span>
           </Link>
 
@@ -122,7 +120,9 @@ export default function MainLayout() {
                       </h4>
                       <div className="bg-zinc-900/50 rounded-lg p-4 border border-zinc-800">
                         <div className="w-full h-24 bg-gradient-to-br from-[#73242A] to-black rounded mb-3" />
-                        <p className="text-xs font-bold uppercase">Novo Veloce RS</p>
+                        <p className="text-xs font-bold uppercase">
+                          Novo Veloce RS
+                        </p>
                         <p className="text-[10px] text-zinc-500 mt-1">
                           O auge da engenharia aerodinâmica.
                         </p>
@@ -175,7 +175,10 @@ export default function MainLayout() {
                         to={calc.path}
                         className="flex items-start gap-3 p-3 rounded-lg hover:bg-white/5 transition-colors group"
                       >
-                        <calc.icon size={18} className="text-[#73242A] mt-0.5" />
+                        <calc.icon
+                          size={18}
+                          className="text-[#73242A] mt-0.5"
+                        />
                         <div>
                           <p className="text-sm font-bold uppercase tracking-wider group-hover:text-[#73242A] transition-colors">
                             {calc.title}
@@ -237,16 +240,32 @@ export default function MainLayout() {
                 <p className="text-[#73242A] text-xs font-bold uppercase tracking-widest">
                   Plataforma
                 </p>
-                <Link to="/cars" onClick={() => setMobileMenuOpen(false)} className="text-2xl font-semibold uppercase">
+                <Link
+                  to="/cars"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="text-2xl font-semibold uppercase"
+                >
                   Carros
                 </Link>
-                <Link to="/compare" onClick={() => setMobileMenuOpen(false)} className="text-2xl font-semibold uppercase">
+                <Link
+                  to="/compare"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="text-2xl font-semibold uppercase"
+                >
                   Comparador
                 </Link>
-                <Link to="/calculators" onClick={() => setMobileMenuOpen(false)} className="text-2xl font-semibold uppercase">
+                <Link
+                  to="/calculators"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="text-2xl font-semibold uppercase"
+                >
                   Calculadoras
                 </Link>
-                <Link to="/guides" onClick={() => setMobileMenuOpen(false)} className="text-2xl font-semibold uppercase">
+                <Link
+                  to="/guides"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="text-2xl font-semibold uppercase"
+                >
                   Guias
                 </Link>
               </div>
@@ -281,12 +300,13 @@ export default function MainLayout() {
                   <Zap size={18} className="-rotate-45 text-white" />
                 </div>
                 <span className="logo-text text-2xl font-black uppercase tracking-tighter">
-                  Performance<span className="text-white">Hub</span>
+                  Patrono<span className="text-white">MS</span>
                 </span>
               </div>
               <p className="text-zinc-500 max-w-sm leading-relaxed mb-8">
-                A referência em Portugal para entusiastas de performance automóvel.
-                Dados precisos, ferramentas técnicas e guias especializados.
+                A referência em Portugal para entusiastas de performance
+                automóvel. Dados precisos, ferramentas técnicas e guias
+                especializados.
               </p>
               <div className="flex gap-4">
                 {["Twitter", "Instagram", "YouTube"].map((social) => (
@@ -307,10 +327,38 @@ export default function MainLayout() {
                 Plataforma
               </h4>
               <ul className="flex flex-col gap-4 text-zinc-500 text-sm">
-                <li><Link to="/cars" className="hover:text-[#73242A] transition-colors">Listagem de Carros</Link></li>
-                <li><Link to="/compare" className="hover:text-[#73242A] transition-colors">Comparador</Link></li>
-                <li><Link to="/calculators" className="hover:text-[#73242A] transition-colors">Calculadoras</Link></li>
-                <li><Link to="/guides" className="hover:text-[#73242A] transition-colors">Guias de Compra</Link></li>
+                <li>
+                  <Link
+                    to="/cars"
+                    className="hover:text-[#73242A] transition-colors"
+                  >
+                    Listagem de Carros
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/compare"
+                    className="hover:text-[#73242A] transition-colors"
+                  >
+                    Comparador
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/calculators"
+                    className="hover:text-[#73242A] transition-colors"
+                  >
+                    Calculadoras
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/guides"
+                    className="hover:text-[#73242A] transition-colors"
+                  >
+                    Guias de Compra
+                  </Link>
+                </li>
               </ul>
             </div>
 
@@ -319,17 +367,45 @@ export default function MainLayout() {
                 Legal
               </h4>
               <ul className="flex flex-col gap-4 text-zinc-500 text-sm">
-                <li><a href="#" className="hover:text-[#73242A] transition-colors">Termos de Uso</a></li>
-                <li><a href="#" className="hover:text-[#73242A] transition-colors">Privacidade</a></li>
-                <li><a href="#" className="hover:text-[#73242A] transition-colors">Cookies</a></li>
-                <li><a href="#" className="hover:text-[#73242A] transition-colors">Contactos</a></li>
+                <li>
+                  <a
+                    href="#"
+                    className="hover:text-[#73242A] transition-colors"
+                  >
+                    Termos de Uso
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="hover:text-[#73242A] transition-colors"
+                  >
+                    Privacidade
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="hover:text-[#73242A] transition-colors"
+                  >
+                    Cookies
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="hover:text-[#73242A] transition-colors"
+                  >
+                    Contactos
+                  </a>
+                </li>
               </ul>
             </div>
           </div>
 
           <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
             <p className="text-zinc-600 text-[10px] font-bold uppercase tracking-widest">
-              © 2026 PerformanceHub. Todos os direitos reservados.
+              © 2026 PatronoMS. Todos os direitos reservados.
             </p>
             <div className="flex items-center gap-6">
               <span className="text-zinc-600 text-[10px] font-bold uppercase tracking-widest">
