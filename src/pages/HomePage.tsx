@@ -12,6 +12,7 @@ import {
 const FEATURED_CARS = [
   {
     id: 1,
+    slug: "veloce-apex-predator-gt",
     name: "Apex Predator GT",
     brand: "Veloce",
     hp: 820,
@@ -21,6 +22,7 @@ const FEATURED_CARS = [
   },
   {
     id: 2,
+    slug: "aether-lumina-rs",
     name: "Lumina RS",
     brand: "Aether",
     hp: 650,
@@ -30,6 +32,7 @@ const FEATURED_CARS = [
   },
   {
     id: 3,
+    slug: "ironworks-titan-v12",
     name: "Titan V12",
     brand: "Ironworks",
     hp: 950,
@@ -212,7 +215,7 @@ export default function HomePage() {
                   <div className="flex items-center justify-between">
                     <span className="text-xl font-black text-[#73242A]">{car.price}</span>
                     <Link
-                      to={`/cars/${car.id}`}
+                      to={`/cars/${car.slug}`}
                       className="p-2 bg-white/5 rounded-full hover:bg-[#73242A] transition-colors"
                     >
                       <ArrowRight size={18} />

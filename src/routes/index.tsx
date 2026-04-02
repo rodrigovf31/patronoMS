@@ -2,6 +2,7 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import MainLayout from "@/src/layouts/MainLayout";
 import HomePage from "@/src/pages/HomePage";
+import CarDetailPage from "@/src/pages/CarDetails";
 
 // ─── Placeholder para páginas futuras ─────────────────────────────────
 // Componente temporário que indica que a página ainda não foi implementada.
@@ -39,24 +40,48 @@ export default function AppRoutes() {
         <Route index element={<HomePage />} />
 
         {/* Carros */}
-        <Route path="cars" element={<PlaceholderPage title="Listagem de Carros" />} />
-        <Route path="cars/:id" element={<PlaceholderPage title="Ficha do Carro" />} />
+        <Route
+          path="cars"
+          element={<PlaceholderPage title="Listagem de Carros" />}
+        />
+        <Route path="cars/:slug" element={<CarDetailPage />} />
 
         {/* Comparador */}
-        <Route path="compare" element={<PlaceholderPage title="Comparador" />} />
+        <Route
+          path="compare"
+          element={<PlaceholderPage title="Comparador" />}
+        />
 
         {/* Calculadoras — agrupadas sob /calculators */}
-        <Route path="calculators" element={<PlaceholderPage title="Calculadoras" />} />
-        <Route path="calculators/cost-of-ownership" element={<PlaceholderPage title="Custo de Posse" />} />
-        <Route path="calculators/power-to-weight" element={<PlaceholderPage title="Potência / Peso" />} />
-        <Route path="calculators/0-100-estimator" element={<PlaceholderPage title="Estimador 0-100" />} />
+        <Route
+          path="calculators"
+          element={<PlaceholderPage title="Calculadoras" />}
+        />
+        <Route
+          path="calculators/cost-of-ownership"
+          element={<PlaceholderPage title="Custo de Posse" />}
+        />
+        <Route
+          path="calculators/power-to-weight"
+          element={<PlaceholderPage title="Potência / Peso" />}
+        />
+        <Route
+          path="calculators/0-100-estimator"
+          element={<PlaceholderPage title="Estimador 0-100" />}
+        />
 
         {/* Guias */}
-        <Route path="guides" element={<PlaceholderPage title="Guias & Insights" />} />
+        <Route
+          path="guides"
+          element={<PlaceholderPage title="Guias & Insights" />}
+        />
         <Route path="guides/:id" element={<PlaceholderPage title="Artigo" />} />
 
         {/* 404 — qualquer URL não mapeada */}
-        <Route path="*" element={<PlaceholderPage title="404 — Página Não Encontrada" />} />
+        <Route
+          path="*"
+          element={<PlaceholderPage title="404 — Página Não Encontrada" />}
+        />
       </Route>
     </Routes>
   );
