@@ -2,7 +2,6 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import MainLayout from "@/src/layouts/MainLayout";
 import HomePage from "@/src/pages/HomePage";
-import CarDetailPage from "@/src/pages/CarDetails";
 import CarDetails from "@/src/pages/CarDetails";
 import CarsPage from "@/src/pages/CarPages";
 
