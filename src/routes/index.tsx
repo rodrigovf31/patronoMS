@@ -3,6 +3,8 @@ import { Routes, Route } from "react-router-dom";
 import MainLayout from "@/src/layouts/MainLayout";
 import HomePage from "@/src/pages/HomePage";
 import CarDetailPage from "@/src/pages/CarDetails";
+import CarDetails from "@/src/pages/CarDetails";
+import CarsPage from "@/src/pages/CarPages";
 
 // ─── Placeholder para páginas futuras ─────────────────────────────────
 // Componente temporário que indica que a página ainda não foi implementada.
@@ -40,11 +42,8 @@ export default function AppRoutes() {
         <Route index element={<HomePage />} />
 
         {/* Carros */}
-        <Route
-          path="cars"
-          element={<PlaceholderPage title="Listagem de Carros" />}
-        />
-        <Route path="cars/:slug" element={<CarDetailPage />} />
+        <Route path="cars" element={<CarsPage />} />
+        <Route path="cars/:slug" element={<CarDetails />} />
 
         {/* Comparador */}
         <Route

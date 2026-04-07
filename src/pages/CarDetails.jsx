@@ -147,7 +147,7 @@ export default function CarDetails() {
           <ChevronRight className="w-3 h-3" />
           <Link to="/cars" className="hover:text-white transition-colors">Carros</Link>
           <ChevronRight className="w-3 h-3" />
-          <Link to={`/categories/${CAR_DATA.categories.slug}`} className="hover:text-white transition-colors">{CAR_DATA.categories.name}</Link>
+          <Link to={`/cars?category=${CAR_DATA.categories.slug}`} className="hover:text-white transition-colors">{CAR_DATA.categories.name}</Link>
           <ChevronRight className="w-3 h-3" />
           <span className="text-white">{CAR_DATA.brands.name} {CAR_DATA.model} {CAR_DATA.generation_code}</span>
         </nav>
