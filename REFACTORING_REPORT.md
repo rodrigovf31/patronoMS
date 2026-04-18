@@ -152,6 +152,9 @@ CarDetails.tsx  CarsPage.tsx  HomePage.tsx
 ## Resumo dos commits
 
 ```
+c6451f6  refactor(pages): use extracted components in HomePage, CarsPage, CarDetails
+19641aa  refactor(components): extract reusable UI and domain components
+929a268  docs: add refactoring report
 ffa7560  chore: validate refactoring with typecheck and build
 ba40405  chore(db): add migration to align schema with TypeScript types
 a3e63db  perf(fonts): self-host web fonts and extract global styles to index.css
@@ -159,3 +162,51 @@ d0acc78  fix(routes): rename CarPages to CarsPage and migrate guides route to sl
 539dca2  chore: clean up template residue and rebrand to PerformanceHub
 27a62c9  feat: Inicialização da Phase B. Push para GitHub de arquitetura melhorada. (anterior)
 ```
+
+---
+
+## Sprint A — Extração de componentes reutilizáveis
+
+Objetivo: eliminar duplicação de markup entre páginas e estabelecer uma
+camada de apresentação coerente (container/presentational pattern). Os
+novos componentes são 100% "dumb": sem imports de `hooks/`, `services/`,
+`lib/` ou `data/`.
+
+### Componentes criados (`src/components/`)
+
+| Ficheiro | LOC | Variants / Slots | Responsabilidade |
+|---|---|---|---|
+| [ui/LoadingState.tsx](src/components/ui/LoadingState.tsx) | 78 | `centered`, `skeleton-grid`, `skeleton-list` | Estado de carregamento polimórfico. |
+| [ui/ErrorState.tsx](src/components/ui/ErrorState.tsx) | 43 | `error`, `title`, `onRetry`, `retryLabel` | Bloco de erro unificado com retry. |
+| [ui/EmptyState.tsx](src/components/ui/EmptyState.tsx) | 41 | `title`, `description`, `action`, `icon` | Estado vazio com slot de ação. |
+| [ui/PageHeader.tsx](src/components/ui/PageHeader.tsx) | 50 | `eyebrow`, `title`, `subtitle`, `align` | Header de página semântico (`<header>` + `<h1>`). |
+| [ui/PlaceholderPage.tsx](src/components/ui/PlaceholderPage.tsx) | 21 | `title` | Placeholder para rotas em construção — movido de `routes/index.tsx`. |
+| [domain/CarCard.tsx](src/components/domain/CarCard.tsx) | 96 | `compact`, `featured` | Card de carro polimórfico (listagem + destaque). |
+| [domain/SpecRow.tsx](src/components/domain/SpecRow.tsx) | 30 | `label`, `value`, `className` | Linha de especificação técnica. |
+
+Total: **359 LOC** de componentes reutilizáveis.
+
+### Páginas refatorizadas
+
+| Página | O que mudou |
+|---|---|
+| [src/pages/HomePage.tsx](src/pages/HomePage.tsx) | `FEATURED_CARS` tipado como `Car[] = []` (Phase B populará via Supabase); renderiza `EmptyState` quando vazio, `CarCard variant="featured"` quando populado. Secção de guias neutralizada: `RECENT_GUIDES` removido (dados inventados), renderiza `EmptyState` sem condicionais. |
+| [src/pages/CarsPage.tsx](src/pages/CarsPage.tsx) | Substitui blocos inline de loading/error/empty por `LoadingState variant="skeleton-grid"`, `ErrorState`, `EmptyState`. Lista usa `CarCard variant="compact"`. Adicionado `PageHeader`. |
+| [src/pages/CarDetails.tsx](src/pages/CarDetails.tsx) | Três blocos (loading/error/not-found) substituídos pelos novos componentes. Removida definição inline de `SpecRow` — agora importada de `components/domain/`. |
+| [src/routes/index.tsx](src/routes/index.tsx) | Removido `import React from "react"` e função `PlaceholderPage` inline — agora importa de `components/ui/PlaceholderPage`. |
+
+### Validação
+
+- `npx tsc --noEmit` → 0 erros.
+- `npm run build` → sucesso (`dist/assets/index-Gkmm483h.js 286.87 kB │ gzip: 86.33 kB`).
+- `grep -r "function PlaceholderPage" src/routes/` → 0 ocorrências.
+- `grep -r "import React from" src/routes/` → 0 ocorrências.
+- `grep -rn "glass-panel rounded-2xl p-8 text-center" src/pages/` → 3 ocorrências em [CarDetails.tsx:367,371,375](src/pages/CarDetails.tsx#L367) que correspondem aos cards de "Valores de Mercado" (price cards) — **não são** error/empty states; são apresentação de dados. Extrair um `PriceCard` está fora do escopo deste sprint.
+- `grep -rn "\\b(any|@ts-ignore)\\b" src/components/` → 0 ocorrências.
+
+### Princípios honrados
+
+- Zero `any`, zero `@ts-ignore`, zero novos pacotes.
+- Zero alterações de design tokens ou utility classes Tailwind existentes.
+- Zero campos inventados em dados (FEATURED_CARS vazio; RECENT_GUIDES eliminado).
+- Container/presentational: novos componentes não importam `hooks/`, `services/`, `lib/`, `data/`.
