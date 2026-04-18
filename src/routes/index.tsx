@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import MainLayout from "@/src/layouts/MainLayout";
 import HomePage from "@/src/pages/HomePage";
 import CarDetails from "@/src/pages/CarDetails";
-import CarsPage from "@/src/pages/CarPages";
+import CarsPage from "@/src/pages/CarsPage";
 
 // ─── Placeholder para páginas futuras ─────────────────────────────────
 // Componente temporário que indica que a página ainda não foi implementada.
@@ -26,11 +26,11 @@ function PlaceholderPage({ title }: { title: string }) {
 //   MainLayout (path="/")     → navbar + footer + <Outlet />
 //     ├─ index               → HomePage (rota raiz "/")
 //     ├─ cars                → listagem
-//     ├─ cars/:id            → ficha individual (parâmetro dinâmico)
+//     ├─ cars/:slug          → ficha individual (parâmetro dinâmico)
 //     ├─ compare             → comparador
 //     ├─ calculators/*       → sub-rotas das calculadoras
 //     ├─ guides              → listagem de guias
-//     ├─ guides/:id          → guia individual
+//     ├─ guides/:slug        → guia individual
 //     └─ *                   → 404 (qualquer rota não definida)
 
 export default function AppRoutes() {
@@ -73,7 +73,7 @@ export default function AppRoutes() {
           path="guides"
           element={<PlaceholderPage title="Guias & Insights" />}
         />
-        <Route path="guides/:id" element={<PlaceholderPage title="Artigo" />} />
+        <Route path="guides/:slug" element={<PlaceholderPage title="Artigo" />} />
 
         {/* 404 — qualquer URL não mapeada */}
         <Route

@@ -1,6 +1,6 @@
 // ─── Mock Data — Phase A ──────────────────────────────────────────────
 // Camada 4: fonte de dados. Substituída por Supabase na Phase B.
-// Extraído dos componentes originais (CarPages.tsx e CarDetails.jsx).
+// Extraído dos componentes originais (CarsPage.tsx e CarDetails.tsx).
 
 import type { Car, CarDetail } from "@/src/types/car";
 
