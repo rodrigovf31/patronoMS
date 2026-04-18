@@ -8,36 +8,37 @@ import {
 } from "lucide-react";
 
 // ─── Mock Data ────────────────────────────────────────────────────────
-// Fase 1: dados estáticos. Serão substituídos por queries ao Supabase.
+// Fase 1: placeholders neutros enquanto a base de dados não é populada.
+// Serão substituídos por queries ao Supabase na Fase B.
 const FEATURED_CARS = [
   {
     id: 1,
-    slug: "veloce-apex-predator-gt",
-    name: "Apex Predator GT",
-    brand: "Veloce",
-    hp: 820,
-    acceleration: "2.6s",
-    price: "285.000€",
+    slug: "",
+    name: "Em breve",
+    brand: "—",
+    hp: "—",
+    acceleration: "—",
+    price: "—",
     color: "from-[#73242A] to-[#260205]",
   },
   {
     id: 2,
-    slug: "aether-lumina-rs",
-    name: "Lumina RS",
-    brand: "Aether",
-    hp: 650,
-    acceleration: "3.1s",
-    price: "195.000€",
+    slug: "",
+    name: "Em breve",
+    brand: "—",
+    hp: "—",
+    acceleration: "—",
+    price: "—",
     color: "from-zinc-800 to-black",
   },
   {
     id: 3,
-    slug: "ironworks-titan-v12",
-    name: "Titan V12",
-    brand: "Ironworks",
-    hp: 950,
-    acceleration: "2.4s",
-    price: "420.000€",
+    slug: "",
+    name: "Em breve",
+    brand: "—",
+    hp: "—",
+    acceleration: "—",
+    price: "—",
     color: "from-[#260205] to-black",
   },
 ];

@@ -63,7 +63,7 @@ export default function MainLayout() {
               <Zap size={18} className="-rotate-45 text-white" />
             </div>
             <span className="logo-text text-xl font-black uppercase tracking-tighter">
-              Patrono<span className="text-white">MS</span>
+              Performance<span className="text-white">Hub</span>
             </span>
           </Link>
 
@@ -121,10 +121,10 @@ export default function MainLayout() {
                       <div className="bg-zinc-900/50 rounded-lg p-4 border border-zinc-800">
                         <div className="w-full h-24 bg-gradient-to-br from-[#73242A] to-black rounded mb-3" />
                         <p className="text-xs font-bold uppercase">
-                          Novo Veloce RS
+                          Em breve
                         </p>
                         <p className="text-[10px] text-zinc-500 mt-1">
-                          O auge da engenharia aerodinâmica.
+                          Novas fichas técnicas a caminho.
                         </p>
                       </div>
                     </div>
@@ -300,7 +300,7 @@ export default function MainLayout() {
                   <Zap size={18} className="-rotate-45 text-white" />
                 </div>
                 <span className="logo-text text-2xl font-black uppercase tracking-tighter">
-                  Patrono<span className="text-white">MS</span>
+                  Performance<span className="text-white">Hub</span>
                 </span>
               </div>
               <p className="text-zinc-500 max-w-sm leading-relaxed mb-8">
@@ -405,7 +405,7 @@ export default function MainLayout() {
 
           <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
             <p className="text-zinc-600 text-[10px] font-bold uppercase tracking-widest">
-              © 2026 PatronoMS. Todos os direitos reservados.
+              © 2026 PerformanceHub. Todos os direitos reservados.
             </p>
             <div className="flex items-center gap-6">
               <span className="text-zinc-600 text-[10px] font-bold uppercase tracking-widest">
