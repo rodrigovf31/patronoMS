@@ -1,25 +1,9 @@
-import React from "react";
 import { Routes, Route } from "react-router-dom";
 import MainLayout from "@/src/layouts/MainLayout";
 import HomePage from "@/src/pages/HomePage";
 import CarDetails from "@/src/pages/CarDetails";
 import CarsPage from "@/src/pages/CarsPage";
-
-// ─── Placeholder para páginas futuras ─────────────────────────────────
-// Componente temporário que indica que a página ainda não foi implementada.
-// Será substituído por componentes reais nas fases seguintes.
-function PlaceholderPage({ title }: { title: string }) {
-  return (
-    <div className="min-h-screen flex items-center justify-center pt-24">
-      <div className="text-center">
-        <h1 className="text-4xl font-black uppercase font-['Orbitron'] mb-4">
-          {title}
-        </h1>
-        <p className="text-zinc-500">Página em desenvolvimento — Fase 2+</p>
-      </div>
-    </div>
-  );
-}
+import PlaceholderPage from "@/src/components/ui/PlaceholderPage";
 
 // ─── Definição de Rotas ───────────────────────────────────────────────
 // Estrutura hierárquica:
