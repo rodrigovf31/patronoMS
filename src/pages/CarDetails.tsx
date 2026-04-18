@@ -9,6 +9,10 @@ import {
   TrendingUp, Check, X, Car, Fuel, Settings, ArrowRight, Activity,
 } from "lucide-react";
 import { useCarBySlug } from "@/src/hooks/useCarBySlug";
+import LoadingState from "@/src/components/ui/LoadingState";
+import ErrorState from "@/src/components/ui/ErrorState";
+import EmptyState from "@/src/components/ui/EmptyState";
+import SpecRow from "@/src/components/domain/SpecRow";
 
 const formatNumber = (num: number): string =>
   new Intl.NumberFormat("pt-PT").format(num);
@@ -25,56 +29,37 @@ export default function CarDetails() {
   // ─── Estado: loading ────────────────────────────────────────────────
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#0D0D0D] text-white font-['Barlow_Condensed'] pt-28 pb-24 flex items-center justify-center">
-        <div className="text-center space-y-4 animate-pulse">
-          <Car className="w-16 h-16 text-[#73242A] mx-auto" strokeWidth={1} />
-          <p className="text-zinc-500 uppercase tracking-widest text-sm">
-            A carregar ficha técnica...
-          </p>
-        </div>
-      </div>
+      <LoadingState
+        variant="centered"
+        message="A carregar ficha técnica..."
+        className="min-h-screen pt-28 pb-24"
+      />
     );
   }
 
   // ─── Estado: error ──────────────────────────────────────────────────
   if (error) {
-    return (
-      <div className="min-h-screen bg-[#0D0D0D] text-white font-['Barlow_Condensed'] pt-28 pb-24 flex items-center justify-center">
-        <div className="glass-panel rounded-2xl p-8 text-center max-w-md">
-          <p className="text-[#73242A] font-['Orbitron'] font-bold uppercase mb-4">
-            Erro ao carregar
-          </p>
-          <p className="text-zinc-400 mb-6">{error.message}</p>
-          <button
-            onClick={() => window.location.reload()}
-            className="bg-[#73242A] hover:bg-[#260205] text-white font-bold uppercase tracking-widest py-3 px-6 rounded-sm transition-colors duration-300"
-          >
-            Tentar Novamente
-          </button>
-        </div>
-      </div>
-    );
+    return <ErrorState error={error} className="min-h-screen pt-28 pb-24" />;
   }
 
   // ─── Estado: not-found ──────────────────────────────────────────────
   if (!data) {
     return (
-      <div className="min-h-screen bg-[#0D0D0D] text-white font-['Barlow_Condensed'] pt-28 pb-24 flex items-center justify-center">
-        <div className="glass-panel rounded-2xl p-8 text-center max-w-md">
-          <Car className="w-16 h-16 text-zinc-600 mx-auto mb-4" strokeWidth={1} />
-          <h2 className="font-['Orbitron'] text-2xl font-black uppercase mb-4">
-            Carro não encontrado
-          </h2>
-          <p className="text-zinc-400 mb-6">
-            O carro que procuras não existe ou foi removido.
-          </p>
-          <Link
-            to="/cars"
-            className="inline-block bg-[#73242A] hover:bg-[#260205] text-white font-bold uppercase tracking-widest py-3 px-6 rounded-sm transition-colors duration-300"
-          >
-            Ver Todos os Carros
-          </Link>
-        </div>
+      <div className="min-h-screen pt-28 pb-24 flex items-center justify-center">
+        <EmptyState
+          title="Carro não encontrado"
+          description="O carro que procuras não existe ou foi removido."
+          icon={<Car className="w-16 h-16 text-zinc-600" strokeWidth={1} />}
+          action={
+            <Link
+              to="/cars"
+              className="inline-block bg-[#73242A] hover:bg-[#260205] text-white font-bold uppercase tracking-widest py-3 px-6 rounded-sm transition-colors duration-300"
+            >
+              Ver Todos os Carros
+            </Link>
+          }
+          className="max-w-md"
+        />
       </div>
     );
   }
@@ -127,17 +112,6 @@ export default function CarDetails() {
       </div>
     );
   };
-
-  const SpecRow = ({ label, value }: { label: string; value: string | number }) => (
-    <div className="flex justify-between py-3 border-b border-white/5 last:border-0">
-      <span className="text-zinc-500 font-['Barlow_Condensed'] uppercase tracking-wider text-sm">
-        {label}
-      </span>
-      <span className="text-white font-['Barlow_Condensed'] font-semibold text-right">
-        {value}
-      </span>
-    </div>
-  );
 
   return (
     <div className="min-h-screen bg-[#0D0D0D] text-white font-['Barlow_Condensed'] pt-28 pb-24 overflow-x-hidden">

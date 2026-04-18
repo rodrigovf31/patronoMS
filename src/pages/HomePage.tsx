@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import {
   ArrowRight,
@@ -6,42 +5,15 @@ import {
   Wallet,
   Scale,
 } from "lucide-react";
+import EmptyState from "@/src/components/ui/EmptyState";
+import CarCard from "@/src/components/domain/CarCard";
+import type { Car } from "@/src/types/car";
 
 // ─── Mock Data ────────────────────────────────────────────────────────
-// Fase 1: placeholders neutros enquanto a base de dados não é populada.
-// Serão substituídos por queries ao Supabase na Fase B.
-const FEATURED_CARS = [
-  {
-    id: 1,
-    slug: "",
-    name: "Em breve",
-    brand: "—",
-    hp: "—",
-    acceleration: "—",
-    price: "—",
-    color: "from-[#73242A] to-[#260205]",
-  },
-  {
-    id: 2,
-    slug: "",
-    name: "Em breve",
-    brand: "—",
-    hp: "—",
-    acceleration: "—",
-    price: "—",
-    color: "from-zinc-800 to-black",
-  },
-  {
-    id: 3,
-    slug: "",
-    name: "Em breve",
-    brand: "—",
-    hp: "—",
-    acceleration: "—",
-    price: "—",
-    color: "from-[#260205] to-black",
-  },
-];
+// Fase 1: FEATURED_CARS fica como Car[] vazio para mostrar a ligação ao
+// type real (Phase B populará via Supabase). Os guias não têm ainda type
+// próprio — a secção renderiza apenas EmptyState até existir um hook.
+const FEATURED_CARS: Car[] = [];
 
 const CALCULATORS = [
   {
@@ -64,21 +36,6 @@ const CALCULATORS = [
     desc: "Simulação baseada em tração, torque e aerodinâmica.",
     icon: Gauge,
     path: "/calculators/0-100-estimator",
-  },
-];
-
-const RECENT_GUIDES = [
-  {
-    id: 1,
-    title: "Guia de Compra: Supercarros Usados",
-    excerpt: "O que verificar antes de investir num ícone da década passada.",
-    date: "28 Mar 2026",
-  },
-  {
-    id: 2,
-    title: "Aerodinâmica Ativa: O Futuro",
-    excerpt: "Como as asas móveis estão a redefinir os limites da física.",
-    date: "25 Mar 2026",
   },
 ];
 
@@ -180,52 +137,18 @@ export default function HomePage() {
             </Link>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {FEATURED_CARS.map((car, idx) => (
-              <div
-                key={car.id}
-                className="glass-panel rounded-2xl overflow-hidden liquid-glass-hover animate-slide-up"
-                style={{ animationDelay: `${idx * 0.1}s` }}
-              >
-                <div
-                  className={`h-48 bg-gradient-to-br ${car.color} relative flex items-center justify-center group`}
-                >
-                  <div className="absolute inset-0 tech-grid opacity-10" />
-                  <Gauge
-                    size={64}
-                    className="text-white/20 group-hover:scale-110 transition-transform duration-500"
-                  />
-                  <div className="absolute top-4 right-4 bg-black/40 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest border border-white/10">
-                    {car.brand}
-                  </div>
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-bold uppercase mb-4">{car.name}</h3>
-                  <div className="grid grid-cols-2 gap-4 mb-6">
-                    <div className="bg-white/5 p-3 rounded-lg border border-white/5">
-                      <p className="text-[10px] text-zinc-500 uppercase font-bold mb-1">Potência</p>
-                      <p className="text-lg font-bold">
-                        {car.hp} <span className="text-[10px] text-zinc-400">CV</span>
-                      </p>
-                    </div>
-                    <div className="bg-white/5 p-3 rounded-lg border border-white/5">
-                      <p className="text-[10px] text-zinc-500 uppercase font-bold mb-1">0-100 km/h</p>
-                      <p className="text-lg font-bold">{car.acceleration}</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-xl font-black text-[#73242A]">{car.price}</span>
-                    <Link
-                      to={`/cars/${car.slug}`}
-                      className="p-2 bg-white/5 rounded-full hover:bg-[#73242A] transition-colors"
-                    >
-                      <ArrowRight size={18} />
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+          {FEATURED_CARS.length === 0 ? (
+            <EmptyState
+              title="Em breve"
+              description="Novos carros em destaque a caminho."
+            />
+          ) : (
+            <div className="grid md:grid-cols-3 gap-8">
+              {FEATURED_CARS.map((car) => (
+                <CarCard key={car.slug} car={car} variant="featured" />
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
@@ -280,30 +203,10 @@ export default function HomePage() {
             </Link>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            {RECENT_GUIDES.map((guide) => (
-              <div key={guide.id} className="glass-panel p-8 rounded-2xl liquid-glass-hover group">
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="px-3 py-1 bg-[#73242A]/20 border border-[#73242A]/30 rounded text-[10px] font-bold text-[#73242A] uppercase tracking-widest">
-                    Editorial
-                  </div>
-                  <span className="text-[10px] text-zinc-600 font-bold uppercase tracking-widest">
-                    {guide.date}
-                  </span>
-                </div>
-                <h3 className="text-2xl font-bold uppercase mb-4 group-hover:text-[#73242A] transition-colors">
-                  {guide.title}
-                </h3>
-                <p className="text-zinc-500 mb-8 leading-relaxed">{guide.excerpt}</p>
-                <Link
-                  to={`/guides/${guide.id}`}
-                  className="flex items-center gap-2 text-white font-bold uppercase tracking-widest text-xs group-hover:gap-4 transition-all"
-                >
-                  Ler Artigo Completo <ArrowRight size={14} className="text-[#73242A]" />
-                </Link>
-              </div>
-            ))}
-          </div>
+          <EmptyState
+            title="Em breve"
+            description="Os nossos guias estão em preparação."
+          />
         </div>
       </section>
     </>
